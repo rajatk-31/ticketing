@@ -6,6 +6,10 @@ const users = new Schema({
         unique: true,
         type: String,
         required: true
+    },
+    role: {
+        type: String,
+        enum: ["admin", "employee"]
     }
 })
 
