@@ -46,6 +46,11 @@ Here is the url to access the logs
 
 
 
+## Documentation
+
+[Documentation](https://ticketing-skrate.herokuapp.com/)
+
+
 
 
 
