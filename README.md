@@ -51,7 +51,7 @@ Here is the url to access the logs
 
 [Documentation](https://ticketing-skrate.herokuapp.com/)
 
-
+[Postman Collection](https://www.getpostman.com/collections/a73670ddaeb169715d7c)
 
 ## Code Explaining Video
 
