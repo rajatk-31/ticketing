@@ -12,7 +12,7 @@ router.post('/new', tokenVerify, createTicket)
 
 
 const closeTicket = require('./closeTicket');
-rouetr.post('/markAsClosed', tokenVerify, closeTicket)
+router.post('/markAsClosed', tokenVerify, closeTicket)
 
 const deleteTicket = require('./deleteTickets')
 router.post('/delete', tokenVerify, deleteTicket)
