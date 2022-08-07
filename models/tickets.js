@@ -1,6 +1,13 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
+
+/**
+ * Priority
+ * 1 - Low
+ * 2 - Medium
+ * 3 - High
+ */
 const tickets = new Schema({
     id: {
         unique: true,
@@ -12,15 +19,19 @@ const tickets = new Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String
+    },
     status: {
         type: String,
         default: "open",
         enum: ["open", "close"]
     },
     priority: {
-        type: String,
-        default: "low",
-        enum: ["low", "medium", "high"]
+        type: Number,
+        min: 1,
+        max: 3,
+        default: 1
     },
     assignedTo: String,
     createdAt: {
@@ -29,5 +40,5 @@ const tickets = new Schema({
     }
 })
 
-
+tickets.index({ id: 1 });
 module.exports = mongoose.model("tickets", tickets);
