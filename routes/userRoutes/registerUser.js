@@ -30,7 +30,12 @@ module.exports = async(req, res) => {
         }).save();
 
         //Generating token
-        const token = jwt.sign(savedUser, process.env.SECRET);
+        let payload = {
+            username,
+            role,
+            _id: savedUser._id
+        };
+        const token = jwt.sign(payload, process.env.SECRET);
 
         return res.json({
             success: true,
@@ -38,6 +43,7 @@ module.exports = async(req, res) => {
         })
 
     } catch (err) {
+        console.log(err)
         return res.json({
             success: false,
             msg: err.message
