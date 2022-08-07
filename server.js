@@ -3,7 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-
+const fs = require('fs')
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT;
@@ -25,7 +25,21 @@ app.use(morgan(function(tokens, req, res) {
         "ms"
     ].join(" ");
 }));
-
+app.use(morgan('common', {
+    stream: fs.createWriteStream('./access.log', { flags: 'a' })
+}));
+app.use(morgan(function(tokens, req, res) {
+    return [
+        new Date(),
+        tokens.method(req, res),
+        tokens.url(req, res),
+        tokens.status(req, res),
+        tokens.res(req, res, "content-length"),
+        "-",
+        tokens["response-time"](req, res),
+        "ms"
+    ].join(" ");
+}));
 
 
 let mongoOptions = {
