@@ -2,6 +2,7 @@
 
 Api for a basic ticketing system with CRUD operations related to tickets
 
+[LIVE API URL](https://ticketing-skrate.herokuapp.com/)
 ## Run Locally
 
 Clone the project
