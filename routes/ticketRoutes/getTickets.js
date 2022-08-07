@@ -19,7 +19,10 @@ module.exports = async(req, res) => {
             return res.json({
                 success: true,
                 tickets: allTickets.map(e => {
-                    e.priority = getObjKey(priorityValues, e.priority)
+                    let x = e.toObject()
+                    let pr = getObjKey(priorityValues, e.priority)
+                    x.priority = pr
+                    return x
                 })
             })
 
@@ -38,11 +41,14 @@ module.exports = async(req, res) => {
                 searchQuery.priority = priorityValues[query.priority]
             }
 
-            let allTickets = await Tickets.find(query)
+            let allTickets = await Tickets.find(searchQuery)
             return res.json({
                 success: true,
                 tickets: allTickets.map(e => {
-                    e.priority = getObjKey(priorityValues, e.priority)
+                    let x = e.toObject()
+                    let pr = getObjKey(priorityValues, e.priority)
+                    x.priority = pr
+                    return x
                 })
             })
         }

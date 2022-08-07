@@ -23,7 +23,7 @@ module.exports = async(req, res) => {
             })
         }
 
-        if (req.decoded.role == 'admin') {
+        if (req.decoded.role != 'admin') {
             return res.json({
                 success: false,
                 msg: "Unauthorized. Only admin can delete tickets."

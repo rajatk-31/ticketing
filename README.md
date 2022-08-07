@@ -38,6 +38,13 @@ Start the server
   npm run start
 ```
 
+## Logger File
+
+Here is the url to access the logs
+
+[Logs](https://ticketing-skrate.herokuapp.com/logs)
+
+
 
 
 

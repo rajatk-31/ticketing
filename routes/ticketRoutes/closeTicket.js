@@ -43,14 +43,18 @@ module.exports = async(req, res) => {
 
             //Finding higher priority tickets
             let higherPriorityTickets = await Tickets.find({ staus: "open", priority: { $gt: ticket.priority } })
-            if (higherPriorityTickets) {
+            console.log("-----", ticket.priority, higherPriorityTickets.length)
+            if (higherPriorityTickets.length > 0) {
 
                 //Returning higher priority tickets
                 return res.json({
                     success: false,
                     msg: "A higher priority task remains to be closed.",
                     tickets: higherPriorityTickets.map(e => {
-                        e.priority = getObjKey(priorityValues, e.priority)
+                        let x = e.toObject()
+                        let pr = getObjKey(priorityValues, e.priority)
+                        x.priority = pr
+                        return x
                     })
                 })
             }

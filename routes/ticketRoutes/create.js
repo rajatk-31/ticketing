@@ -1,16 +1,16 @@
 const Tickets = require('../../models/tickets')
 const Users = require('../../models/users')
-
+const mongoose = require('mongoose');
 
 
 module.exports = async(req, res) => {
     try {
-        const { title, description, assigneTo, priority } = req.body;
+        let { title, description, assignedTo, priority } = req.body;
 
-        if (!title || !description) {
+        if (!title || !description || !assignedTo) {
             return res.json({
                 success: false,
-                msg: "Incomplete details. Title / Details missing"
+                msg: "Incomplete details. Title / Description / assignedTo  missing"
             })
         }
 
@@ -21,15 +21,12 @@ module.exports = async(req, res) => {
             })
         }
 
-        if (!assigneTo) {
-            const getLeast = await Users.findOne({}).sort({ ticketCount: 1 })
-            if (getLeast) {
-                assigneTo = getLeast.username;
-                await Users.findOneAndUpdate({ username: assigneTo }, { $inc: { ticketCount: 1 } })
-            }
-        }
+        //Updating ticket count for user
+        await Users.findOneAndUpdate({ username: assignedTo }, { $inc: { ticketCount: 1 } })
+
 
         let data = {
+            id: new mongoose.Types.ObjectId(),
             title,
             description
         }
@@ -47,15 +44,15 @@ module.exports = async(req, res) => {
 
 
         //If assign to provided otherwise assigning to person who has least tickets assigned else empty
-        if (assigneTo)
-            data.assignedTo = assigneTo
+        if (assignedTo)
+            data.assignedTo = assignedTo
 
 
         //saving data
         let savedTicket = await new Tickets(data).save()
         return res.json({
             success: true,
-            id: savedTicket.id
+            "ticketID": savedTicket.id
         })
 
     } catch (err) {

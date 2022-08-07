@@ -59,9 +59,12 @@ mongoose.connect(process.env.MONGO_URI, mongoOptions, err => {
 });
 
 
+
 let routes = require('./routes/routes')
 app.use('/', routes)
 
+const documentation = require('./documentation/routes')
+app.use('/', documentation)
 
 app.listen(port, () => {
     console.log(new Date(), __filename, "Server started, Port : " + port);

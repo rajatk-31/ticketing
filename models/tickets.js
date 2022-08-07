@@ -13,7 +13,7 @@ const tickets = new Schema({
         unique: true,
         type: Schema.Types.ObjectId,
         required: true,
-        default: new mongoose.Types.ObjectId()
+        // default: new mongoose.Types.ObjectId()
     },
     title: {
         type: String,

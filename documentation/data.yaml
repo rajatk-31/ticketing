@@ -1,0 +1,151 @@
+openapi: 3.0.0
+info:
+  title: Ticketing
+  version: 1.0.0
+servers:
+  - url: https://ticketing-skrate.herokuapp.com
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /users/new:
+    post:
+      tags:
+        - General
+      summary: Create User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: rajat
+                role: admin
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/login:
+    post:
+      tags:
+        - General
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: rajat
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /tickets/new:
+    post:
+      tags:
+        - General
+      summary: Create Ticket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: Test Ticket
+                description: This is a test ticket
+                priority: low
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /tickets/:
+    get:
+      tags:
+        - General
+      summary: Get Tickets Filters
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: title
+          in: query
+          schema:
+            type: string
+          example: test title
+          required: false
+        - name: priority
+          in: query
+          schema:
+            type: string
+          example: high
+          required: false
+        - name: status
+          in: query
+          schema:
+            type: string
+          example: close
+          required: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /tickets/all:
+    get:
+      tags:
+        - General
+      summary: Get all Tickets
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /tickets/markAsClosed:
+    post:
+      tags:
+        - General
+      summary: Close Ticket
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ticketID:
+                  type: string
+                  example: 62ef907db9b7ffed057cc403
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /tickets/delete:
+    post:
+      tags:
+        - General
+      summary: Delete Ticket
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ticketID:
+                  type: string
+                  example: 62ef907db9b7ffed057cc403
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
