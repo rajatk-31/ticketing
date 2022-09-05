@@ -53,11 +53,6 @@ Here is the url to access the logs
 
 [Postman Collection](https://www.getpostman.com/collections/a73670ddaeb169715d7c)
 
-## Code Explaining Video
-
-Here is the url to the video
-
-[Code Video](https://drive.google.com/file/d/1j4vXW5adI2m02wqv_Exd4CNw2LMbH1ZO/view?usp=sharing)
 
 
 
